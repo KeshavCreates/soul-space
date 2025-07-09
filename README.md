@@ -4,9 +4,7 @@
 
 Soul-Space is a beautifully designed web application that provides a safe and private space for you to chat with a personalized AI companion. Choose a character, define their personality with unique traits, and share your thoughts, ideas, or even images in a calm, non-judgmental environment.
 
-\<br\>
 
-\<br\>
 
 ## 🚀 About The Project
 
@@ -14,7 +12,7 @@ In a world that's always moving, Soul-Space offers a moment of pause. It's more 
 
 The goal is to create a serene digital experience that prioritizes user emotion and privacy.
 
-\<br\>
+
 
 ## 🌟 Key Features
 
@@ -30,7 +28,7 @@ The goal is to create a serene digital experience that prioritizes user emotion 
   * **✨ Stunning UI:** A dynamic, animated gradient background with floating particles and a glassmorphism design for a premium feel.
   * **📱 Fully Responsive:** Looks and works great on all devices, from desktops to mobile phones.
 
-\<br\>
+
 
 ## 🛠️ Tech Stack
 
@@ -42,7 +40,7 @@ This project was built using a modern, serverless-first approach.
   * **AI:** [Google Gemini API](https://ai.google.dev/)
   * **Deployment:** [Netlify](https://www.netlify.com/)
 
-\<br\>
+
 
 ## ⚙️ Getting Started
 
@@ -72,7 +70,7 @@ You need to have [Node.js](https://nodejs.org/) installed to run `npm`. You will
 
 > **Note:** The API calls will not work locally unless you use the Netlify CLI to simulate the serverless environment. The easiest way to test is to deploy it directly to Netlify.
 
-\<br\>
+
 
 ## ☁️ Deployment
 
@@ -98,7 +96,7 @@ This app is designed for easy deployment on **Netlify**.
 
 Your site will now be live\!
 
-\<br\>
+
 
 ## 📁 File Structure
 
@@ -115,7 +113,7 @@ Your site will now be live\!
 └── README.md             # You are here!
 ```
 
-\<br\>
+
 
 ## 🗺️ Future Improvements
 
@@ -125,13 +123,13 @@ Your site will now be live\!
   * [ ] Add a "Search History" feature.
   * [ ] Allow users to choose different UI themes.
 
-\<br\>
+
 
 ## 📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-\<br\>
+
 
 ## 🤝 Contact
 
