@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soul-Space | Your Quiet Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-gray-800 antialiased">
+    <!-- The floating particles background effect -->
+    <div class="floating-particles" id="particles-js"></div>
+
+    <!-- Main application container -->
+    <div id="app" class="h-full w-full flex flex-col items-center justify-center transition-all duration-500">
+        
+        <!-- Screen for user to enter their name -->
+        <div id="user-name-screen" class="hidden w-full max-w-md mx-auto text-center p-4">
+            <div class="glass-effect p-8 rounded-3xl">
+                <h1 class="header-title text-4xl font-bold mb-3">Welcome to Soul-Space</h1>
+                <p class="text-lg text-white/80 mb-6">What should we call you?</p>
+                <form id="user-name-form">
+                    <input type="text" id="user-name-input" class="w-full form-input text-white text-center text-lg p-3 rounded-xl focus:outline-none mb-6" placeholder="Enter your name...">
+                    <button type="submit" class="w-full btn-primary text-white font-semibold py-3 px-6 rounded-xl text-lg">Continue</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Screen for selecting a character companion -->
+        <div id="character-selection-screen" class="hidden w-full h-full p-4 overflow-y-auto">
+            <div class="text-center pt-8 pb-4">
+                <h1 class="header-title text-4xl md:text-5xl font-bold mb-3">Hello, <span id="user-name-display"></span>!</h1>
+                <p class="text-lg text-white/80">Choose a companion to share your world with.</p>
+            </div>
+            <div id="continue-chat-container" class="text-center mb-8 hidden">
+                 <button id="continue-chat-btn" class="btn-secondary text-white font-semibold py-3 px-8 rounded-xl text-lg inline-flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" /></svg>
+                    Continue Last Chat
+                </button>
+            </div>
+            <div id="character-grid" class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 pb-8"></div>
+        </div>
+
+        <!-- Modal for selecting companion traits -->
+        <div id="trait-selection-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+            <div id="trait-modal-content" class="glass-effect rounded-3xl shadow-2xl w-full max-w-2xl p-8 text-white relative">
+                <button id="close-modal-btn" class="absolute top-6 right-6 p-2 rounded-full hover:bg-white/20 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <h2 class="text-3xl font-bold text-center mb-4">Craft Your Companion</h2>
+                <div class="mb-6">
+                    <label for="companion-name-input" class="block text-center text-white/70 mb-2">Give your companion a name:</label>
+                    <input type="text" id="companion-name-input" class="w-full form-input text-white text-center text-lg p-3 rounded-xl focus:outline-none">
+                </div>
+                <p class="text-center text-white/70 mb-4">Select the traits that resonate with you.</p>
+                <div id="modal-trait-container" class="flex flex-wrap justify-center gap-3 max-h-[35vh] overflow-y-auto scrollbar-custom pr-2"></div>
+                <button id="start-chat-btn" class="w-full mt-8 btn-primary text-white font-semibold py-4 px-6 rounded-2xl text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">
+                    Start Conversation
+                </button>
+            </div>
+        </div>
+
+        <!-- The main chat interface screen -->
+        <div id="chat-screen" class="hidden w-full h-full max-w-3xl mx-auto glass-effect rounded-none md:rounded-3xl md:my-4 flex flex-col overflow-hidden">
+            <div class="flex-shrink-0 flex items-center p-4 border-b border-white/20">
+                <button id="back-to-selection" class="p-2 rounded-full hover:bg-white/10 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+                <div id="chat-header-avatar" class="w-12 h-12 rounded-full ml-3"></div>
+                <div class="ml-4 flex-1">
+                    <h2 id="chat-header-name" class="text-lg font-semibold text-white"></h2>
+                    <p id="chat-header-status" class="text-sm text-green-300 flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>Online</p>
+                </div>
+            </div>
+            <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-6 scrollbar-custom"></div>
+            <div class="flex-shrink-0 p-4 border-t border-white/20">
+                <div id="image-preview-container" class="hidden relative w-24 h-24 mb-2 p-1 border border-white/20 rounded-lg">
+                    <img id="image-preview" class="w-full h-full object-cover rounded-md">
+                    <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 w-6 h-6 flex items-center justify-center text-xs">
+                        &times;
+                    </button>
+                </div>
+                <form id="message-form" class="flex items-end space-x-3">
+                    <button type="button" id="image-upload-btn" class="p-3 bg-white/10 text-white rounded-xl hover:bg-white/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    </button>
+                    <input type="file" id="image-input" class="hidden" accept="image/*">
+                    <textarea id="message-input" rows="1" class="flex-1 p-3 chat-input rounded-xl resize-none focus:outline-none scrollbar-custom" placeholder="Share your thoughts..."></textarea>
+                    <button type="submit" class="p-3 btn-primary text-white rounded-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.428A1 1 0 009.894 15V4.106A1 1 0 0010.894 2.553z" /></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
